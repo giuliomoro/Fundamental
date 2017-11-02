@@ -106,6 +106,7 @@ ADSRWidget::ADSRWidget() {
 	setModule(module);
 	box.size = Vec(15*8, 380);
 
+#ifdef RACK_GUI
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
@@ -117,6 +118,7 @@ ADSRWidget::ADSRWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+#endif /* RACK_GUI */
 
 	addParam(createParam<RoundBlackKnob>(Vec(62, 57), module, ADSR::ATTACK_PARAM, 0.0, 1.0, 0.5));
 	addParam(createParam<RoundBlackKnob>(Vec(62, 124), module, ADSR::DECAY_PARAM, 0.0, 1.0, 0.5));
@@ -132,8 +134,10 @@ ADSRWidget::ADSRWidget() {
 	addInput(createInput<PJ301MPort>(Vec(48, 320), module, ADSR::TRIG_INPUT));
 	addOutput(createOutput<PJ301MPort>(Vec(87, 320), module, ADSR::ENVELOPE_OUTPUT));
 
+#ifdef RACK_GUI
 	addChild(createLight<SmallLight<RedLight>>(Vec(94, 41), module, ADSR::ATTACK_LIGHT));
 	addChild(createLight<SmallLight<RedLight>>(Vec(94, 108), module, ADSR::DECAY_LIGHT));
 	addChild(createLight<SmallLight<RedLight>>(Vec(94, 175), module, ADSR::SUSTAIN_LIGHT));
 	addChild(createLight<SmallLight<RedLight>>(Vec(94, 241), module, ADSR::RELEASE_LIGHT));
+#endif /* RACK_GUI */
 }

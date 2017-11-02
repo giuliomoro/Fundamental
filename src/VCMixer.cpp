@@ -49,6 +49,7 @@ void VCMixer::step() {
 VCMixerWidget::VCMixerWidget() {
 	VCMixer *module = new VCMixer();
 	setModule(module);
+#ifdef RACK_GUI
 	box.size = Vec(15*10, 380);
 
 	{
@@ -62,6 +63,7 @@ VCMixerWidget::VCMixerWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+#endif /* RACK_GUI */
 
 	addParam(createParam<RoundLargeBlackKnob>(Vec(52, 58), module, VCMixer::MIX_PARAM, 0.0, 1.0, 0.5));
 	addParam(createParam<RoundBlackKnob>(Vec(57, 139), module, VCMixer::CH1_PARAM, 0.0, 1.0, 0.0));

@@ -149,6 +149,7 @@ VCFWidget::VCFWidget() {
 	setModule(module);
 	box.size = Vec(15*8, 380);
 
+#ifdef RACK_GUI
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
@@ -160,6 +161,7 @@ VCFWidget::VCFWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+#endif /* RACK_GUI */
 
 	addParam(createParam<RoundHugeBlackKnob>(Vec(33, 61), module, VCF::FREQ_PARAM, 0.0, 1.0, 0.5));
 	addParam(createParam<RoundBlackKnob>(Vec(12, 143), module, VCF::FINE_PARAM, 0.0, 1.0, 0.5));

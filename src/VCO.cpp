@@ -235,6 +235,7 @@ VCOWidget::VCOWidget() {
 	setModule(module);
 	box.size = Vec(15*10, 380);
 
+#ifdef RACK_GUI
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
@@ -246,6 +247,7 @@ VCOWidget::VCOWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+#endif /* RACK_GUI */
 
 	addParam(createParam<CKSS>(Vec(15, 77), module, VCO::MODE_PARAM, 0.0, 1.0, 1.0));
 	addParam(createParam<CKSS>(Vec(119, 77), module, VCO::SYNC_PARAM, 0.0, 1.0, 1.0));
@@ -266,7 +268,9 @@ VCOWidget::VCOWidget() {
 	addOutput(createOutput<PJ301MPort>(Vec(80, 320), module, VCO::SAW_OUTPUT));
 	addOutput(createOutput<PJ301MPort>(Vec(114, 320), module, VCO::SQR_OUTPUT));
 
+#ifdef RACK_GUI
 	addChild(createLight<SmallLight<GreenRedLight>>(Vec(99, 42), module, VCO::PHASE_POS_LIGHT));
+#endif /* RACK_GUI */
 }
 
 
@@ -333,6 +337,7 @@ VCO2Widget::VCO2Widget() {
 	setModule(module);
 	box.size = Vec(15*6, 380);
 
+#ifdef RACK_GUI
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
@@ -344,6 +349,7 @@ VCO2Widget::VCO2Widget() {
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+#endif /* RACK_GUI */
 
 	addParam(createParam<CKSS>(Vec(62, 150), module, VCO2::MODE_PARAM, 0.0, 1.0, 1.0));
 	addParam(createParam<CKSS>(Vec(62, 215), module, VCO2::SYNC_PARAM, 0.0, 1.0, 1.0));
@@ -358,7 +364,9 @@ VCO2Widget::VCO2Widget() {
 
 	addOutput(createOutput<PJ301MPort>(Vec(54, 320), module, VCO2::OUT_OUTPUT));
 
+#ifdef RACK_GUI
 	addChild(createLight<SmallLight<GreenRedLight>>(Vec(68, 41), module, VCO2::PHASE_POS_LIGHT));
+#endif /* RACK_GUI */
 }
 
 

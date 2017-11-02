@@ -1,4 +1,4 @@
-#include "rack.hpp"
+#include "newrack.hpp"
 
 
 using namespace rack;
@@ -50,11 +50,13 @@ struct _8VERTWidget : ModuleWidget {
 	_8VERTWidget();
 };
 
-struct ScopeWidget : ModuleWidget {
-	ScopeWidget();
-};
+// struct ScopeWidget : ModuleWidget {
+	// ScopeWidget();
+// };
 
 struct SEQ3Widget : ModuleWidget {
 	SEQ3Widget();
+#ifdef RACK_GUI
 	Menu *createContextMenu() override;
+#endif /* RACK_GUI */
 };

@@ -36,6 +36,7 @@ _8VERTWidget::_8VERTWidget() {
 	setModule(module);
 	box.size = Vec(8 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT);
 
+#ifdef RACK_GUI
 	SVGPanel *panel = new SVGPanel();
 	panel->box.size = box.size;
 	panel->setBackground(SVG::load(assetPlugin(plugin, "res/8VERT.svg")));
@@ -45,6 +46,7 @@ _8VERTWidget::_8VERTWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 30, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x - 30, 365)));
+#endif /* RACK_GUI */
 
 	addParam(createParam<RoundSmallBlackKnob>(Vec(45.308, 47.753), module, 0, -1.0, 1.0, 0.0));
 	addParam(createParam<RoundSmallBlackKnob>(Vec(45.308, 86.198), module, 1, -1.0, 1.0, 0.0));
@@ -73,6 +75,7 @@ _8VERTWidget::_8VERTWidget() {
 	addOutput(createOutput<PJ301MPort>(Vec(86.393, 281.059), module, 6));
 	addOutput(createOutput<PJ301MPort>(Vec(86.393, 319.504), module, 7));
 
+#ifdef RACK_GUI
 	addChild(createLight<TinyLight<GreenRedLight>>(Vec(107.702, 50.414), module, 0));
 	addChild(createLight<TinyLight<GreenRedLight>>(Vec(107.702, 88.859), module, 2));
 	addChild(createLight<TinyLight<GreenRedLight>>(Vec(107.702, 127.304), module, 4));
@@ -81,4 +84,5 @@ _8VERTWidget::_8VERTWidget() {
 	addChild(createLight<TinyLight<GreenRedLight>>(Vec(107.702, 242.635), module, 10));
 	addChild(createLight<TinyLight<GreenRedLight>>(Vec(107.702, 281.076), module, 12));
 	addChild(createLight<TinyLight<GreenRedLight>>(Vec(107.702, 319.521), module, 14));
+#endif /* RACK_GUI */
 }

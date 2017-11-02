@@ -1,0 +1,6 @@
+.*.sw?
+*.d
+build/
+plugin.so
+plugin.dylib
+plugin.dll

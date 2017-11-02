@@ -113,6 +113,7 @@ DelayWidget::DelayWidget() {
 	setModule(module);
 	box.size = Vec(15*8, 380);
 
+#ifdef RACK_GUI
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
@@ -124,6 +125,7 @@ DelayWidget::DelayWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+#endif /* RACK_GUI */
 
 	addParam(createParam<RoundBlackKnob>(Vec(67, 57), module, Delay::TIME_PARAM, 0.0, 1.0, 0.5));
 	addParam(createParam<RoundBlackKnob>(Vec(67, 123), module, Delay::FEEDBACK_PARAM, 0.0, 1.0, 0.5));

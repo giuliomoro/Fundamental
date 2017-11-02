@@ -19,6 +19,8 @@ void init(rack::Plugin *p) {
 	p->addModel(createModel<ADSRWidget>("Fundamental", "Fundamental", "ADSR", "ADSR"));
 	p->addModel(createModel<VCMixerWidget>("Fundamental", "Fundamental", "VCMixer", "VC Mixer"));
 	p->addModel(createModel<_8VERTWidget>("Fundamental", "Fundamental", "8VERT", "8VERT"));
+#ifdef RACK_GUI
 	p->addModel(createModel<ScopeWidget>("Fundamental", "Fundamental", "Scope", "Scope"));
 	p->addModel(createModel<SEQ3Widget>("Fundamental", "Fundamental", "SEQ3", "SEQ-3"));
+#endif /* RACK_GUI */
 }

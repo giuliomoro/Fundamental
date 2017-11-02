@@ -126,6 +126,7 @@ LFOWidget::LFOWidget() {
 	setModule(module);
 	box.size = Vec(15*10, 380);
 
+#ifdef RACK_GUI
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
@@ -137,6 +138,7 @@ LFOWidget::LFOWidget() {
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+#endif /* RACK_GUI */
 
 	addParam(createParam<CKSS>(Vec(15, 77), module, LFO::OFFSET_PARAM, 0.0, 1.0, 1.0));
 	addParam(createParam<CKSS>(Vec(119, 77), module, LFO::INVERT_PARAM, 0.0, 1.0, 1.0));
@@ -157,7 +159,9 @@ LFOWidget::LFOWidget() {
 	addOutput(createOutput<PJ301MPort>(Vec(80, 320), module, LFO::SAW_OUTPUT));
 	addOutput(createOutput<PJ301MPort>(Vec(114, 320), module, LFO::SQR_OUTPUT));
 
+#ifdef RACK_GUI
 	addChild(createLight<SmallLight<GreenRedLight>>(Vec(99, 42), module, LFO::PHASE_POS_LIGHT));
+#endif /* RACK_GUI */
 }
 
 
@@ -222,6 +226,7 @@ LFO2Widget::LFO2Widget() {
 	setModule(module);
 	box.size = Vec(15*6, 380);
 
+#ifdef RACK_GUI
 	{
 		SVGPanel *panel = new SVGPanel();
 		panel->box.size = box.size;
@@ -233,6 +238,7 @@ LFO2Widget::LFO2Widget() {
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 0)));
 	addChild(createScrew<ScrewSilver>(Vec(15, 365)));
 	addChild(createScrew<ScrewSilver>(Vec(box.size.x-30, 365)));
+#endif /* RACK_GUI */
 
 	addParam(createParam<CKSS>(Vec(62, 150), module, LFO2::OFFSET_PARAM, 0.0, 1.0, 1.0));
 	addParam(createParam<CKSS>(Vec(62, 215), module, LFO2::INVERT_PARAM, 0.0, 1.0, 1.0));
@@ -247,5 +253,7 @@ LFO2Widget::LFO2Widget() {
 
 	addOutput(createOutput<PJ301MPort>(Vec(54, 319), module, LFO2::INTERP_OUTPUT));
 
+#ifdef RACK_GUI
 	addChild(createLight<SmallLight<GreenRedLight>>(Vec(68, 41), module, LFO2::PHASE_POS_LIGHT));
+#endif /* RACK_GUI */
 }
