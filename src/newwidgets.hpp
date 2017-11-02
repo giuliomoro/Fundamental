@@ -10,7 +10,9 @@
 
 #include "math.hpp"
 #include "util.hpp"
+#ifdef RACK_GUI
 #include "events.hpp"
+#endif /* RACK_GUI */
 
 
 #ifdef RACK_GUI
@@ -118,8 +120,10 @@ struct Widget {
 	*/
 	void removeChild(Widget *widget);
 	void clearChildren();
+#ifdef RACK_GUI
 	/** Recursively finalizes event start/end pairs as needed */
 	void finalizeEvents();
+#endif /* RACK_GUI */
 
 	/** Advances the module by one frame */
 	virtual void step();

@@ -26,8 +26,8 @@
 #include "newapp.hpp"
 #ifdef RACK_GUI
 #include "asset.hpp"
-#endif /* RACK_GUI */
 #include "util/request.hpp"
+#endif /* RACK_GUI */
 
 
 namespace rack {
