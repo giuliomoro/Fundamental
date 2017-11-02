@@ -9,6 +9,7 @@ struct Io : Module {
 		NUM_PARAMS
 	};
 	enum InputIds {
+		CH0_INPUT,
 		CH1_INPUT,
 		NUM_INPUTS
 	};
@@ -24,8 +25,10 @@ void Io::step() {
 	float ch1 = inputs[CH1_INPUT].value;
 	unsigned int channel = 0;
 	unsigned int element = gRackIo->currentOutFrame++ * gRackIo->audioOutChannels + channel;
+#ifndef NDEBUG
 	printf("[%3d]: %4.10f\n", element, ch1);
-	gRackIo->audioOut[element] = ch1;
+#endif
+	gRackIo->audioOut[element] = ch1 * 0.2f;
 	if(gRackIo->currentOutFrame == gRackIo->audioFrames)
 		gRackIo->currentOutFrame = 0;
 }
@@ -33,8 +36,8 @@ void Io::step() {
 IoWidget::IoWidget() {
 	gRackIo = new struct rackIo;
 	memset(gRackIo, 0, sizeof(struct rackIo));
-	gRackIo->audioFrames = 16;
-	gRackIo->audioOutChannels = 1;
+	gRackIo->audioFrames = 128;
+	gRackIo->audioOutChannels = Io::NUM_INPUTS; // this is getting confusing
 	gRackIo->audioIn = new float[gRackIo->audioInChannels * gRackIo->audioFrames];
 	gRackIo->audioOut = new float[gRackIo->audioOutChannels * gRackIo->audioFrames];
 	// TODO: freeme

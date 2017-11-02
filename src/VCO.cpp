@@ -193,7 +193,11 @@ struct VCO : Module {
 		NUM_LIGHTS
 	};
 
+#ifdef RACK_FAST
+	VoltageControlledOscillator<8, 8> oscillator;
+#else
 	VoltageControlledOscillator<16, 16> oscillator;
+#endif /* RACK_FAST */
 
 	VCO() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS) {}
 	void step() override;

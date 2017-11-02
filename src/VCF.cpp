@@ -31,6 +31,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "Fundamental.hpp"
 
+#ifdef RACK_FAST
+#define USE_MATH_NEON
+#endif /* RACK_FAST */
+#ifdef USE_MATH_NEON
+#include "math_neon.h"
+#define powf(a,b) powf_neon(a,b)
+#define tanhf(a) tanhf_neon(a)
+#endif /* USE_MATH_NEON */
 
 // The clipping function of a transistor pair is approximately tanh(x)
 // TODO: Put this in a lookup table. 5th order approx doesn't seem to cut it
@@ -121,7 +129,9 @@ void VCF::step() {
 	float gain = powf(100.0, drive);
 	input *= gain;
 	// Add -60dB noise to bootstrap self-oscillation
+#ifndef RACK_FAST
 	input += 1.0e-6 * (2.0*randomf() - 1.0);
+#endif
 
 	// Set resonance
 	float res = params[RES_PARAM].value + inputs[RES_INPUT].value / 5.0;

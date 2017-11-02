@@ -1,5 +1,5 @@
-SOURCES = $(wildcard src/*.cpp)
 CPP_SRCS = $(wildcard src/*.cpp)
+CPP_SRCS := $(filter-out src/render.cpp, $(CPP_SRCS))
 OBJECTS = $(addprefix build/src/,$(notdir $(CPP_SRCS:.cpp=.o)))
 
 #include ../../plugin.mk
@@ -19,8 +19,11 @@ dist: all
 build/src/%.o: ./src/%.cpp
 	$(AT) $(CXX) $(SYNTAX_FLAG) $(INCLUDES) $(CXXFLAGS) -Wall -c -fmessage-length=0 -U_FORTIFY_SOURCE -MMD -MP -MF"$(@:%.o=%.d)" -o "$@" "$<" $(CPPFLAGS) -fPIC -Wno-unused-function
 
-test: $(OBJECTS)
-	$(CXX) $(OBJECTS) -o test $(LDFLAGS)
+build/main.o: main.cpp
+	$(AT) $(CXX) $(SYNTAX_FLAG) $(INCLUDES) $(CXXFLAGS) -Wall -c -fmessage-length=0 -U_FORTIFY_SOURCE -MMD -MP -MF"$(@:%.o=%.d)" -o "$@" "$<" $(CPPFLAGS) -fPIC -Wno-unused-function
+
+test: $(OBJECTS) build/main.o
+	$(CXX) $(OBJECTS) -o test $(LDFLAGS) build/main.o
 
 clean:
 	rm build/src/*
