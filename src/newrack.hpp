@@ -1,3 +1,5 @@
+#pragma once
+
 #include "math.hpp"
 #include "plugin.hpp"
 #include "engine.hpp"

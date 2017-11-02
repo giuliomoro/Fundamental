@@ -10,6 +10,10 @@ extern Plugin *plugin;
 // module widgets
 ////////////////////
 
+struct IoWidget : ModuleWidget {
+	IoWidget();
+};
+
 struct VCOWidget : ModuleWidget {
 	VCOWidget();
 };

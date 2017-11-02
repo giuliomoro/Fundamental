@@ -9,6 +9,7 @@ void init(rack::Plugin *p) {
 #ifdef VERSION
 	p->version = TOSTRING(VERSION);
 #endif
+	p->addModel(createModel<IoWidget>("Fundamental", "Fundamental", "IO", "IO1"));
 	p->addModel(createModel<VCOWidget>("Fundamental", "Fundamental", "VCO", "VCO-1"));
 	p->addModel(createModel<VCO2Widget>("Fundamental", "Fundamental", "VCO2", "VCO-2"));
 	p->addModel(createModel<VCFWidget>("Fundamental", "Fundamental", "VCF", "VCF"));

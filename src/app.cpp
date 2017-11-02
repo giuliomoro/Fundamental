@@ -19,6 +19,7 @@ Toolbar *gToolbar = NULL;
 RackScene *gRackScene = NULL;
 
 
+#ifdef RACK_GUI
 void sceneInit() {
 	gRackScene = new RackScene();
 	gScene = gRackScene;
@@ -28,6 +29,7 @@ void sceneDestroy() {
 	delete gScene;
 	gScene = NULL;
 }
+#endif /* RACK_GUI */
 
 
 } // namespace rack

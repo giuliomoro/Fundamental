@@ -7,7 +7,9 @@
 namespace rack {
 
 Port::~Port() {
+#ifdef RACK_GUI
 	gRackWidget->wireContainer->removeAllWires(this);
+#endif /* RACK_GUI */
 }
 
 #ifdef RACK_GUI

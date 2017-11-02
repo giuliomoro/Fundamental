@@ -114,12 +114,14 @@ void ModuleWidget::fromJson(json_t *rootJ) {
 }
 
 void ModuleWidget::disconnect() {
+#ifdef RACK_GUI
 	for (Port *input : inputs) {
 		gRackWidget->wireContainer->removeAllWires(input);
 	}
 	for (Port *output : outputs) {
 		gRackWidget->wireContainer->removeAllWires(output);
 	}
+#endif /* RACK_GUI */
 }
 
 void ModuleWidget::reset() {

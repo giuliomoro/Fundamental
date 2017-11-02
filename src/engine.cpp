@@ -69,7 +69,11 @@ void engineDestroy() {
 	assert(modules.empty());
 }
 
+#ifdef RACK_GUI
 static void engineStep() {
+#else
+void engineStep() {
+#endif /* RACK_GUI */
 	// Param interpolation
 	if (smoothModule) {
 		float value = smoothModule->params[smoothParamId].value;
@@ -97,7 +101,7 @@ static void engineStep() {
 	}
 }
 
-static void engineRun() {
+void engineRun() {
 	// Set CPU to denormals-are-zero mode
 	// http://carlh.net/plugins/denormals.php
 #ifndef RACK_ARM
@@ -111,7 +115,9 @@ static void engineRun() {
 	auto lastTime = std::chrono::high_resolution_clock::now();
 
 	while (running) {
+#ifdef RACK_GUI
 		vipMutex.wait();
+#endif /* RACK_GUI */
 
 		if (!gPaused) {
 			std::lock_guard<std::mutex> lock(mutex);
