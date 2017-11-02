@@ -5,6 +5,7 @@
 namespace rack {
 
 
+#ifdef RACK_JSON
 json_t *ParamWidget::toJson() {
 	json_t *paramJ = json_real(value);
 	return paramJ;
@@ -13,6 +14,7 @@ json_t *ParamWidget::toJson() {
 void ParamWidget::fromJson(json_t *rootJ) {
 	setValue(json_number_value(rootJ));
 }
+#endif /* RACK_JSON */
 
 void ParamWidget::randomize() {
 	if (randomizable)

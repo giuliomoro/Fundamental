@@ -63,9 +63,11 @@ struct Module {
 	virtual void step() {}
 	virtual void onSampleRateChange() {}
 
+#ifdef RACK_JSON
 	/** Override these to store extra internal data in the "data" property */
 	virtual json_t *toJson() { return NULL; }
 	virtual void fromJson(json_t *root) {}
+#endif /* RACK_JSON */
 
 	/** Override these to implement spacial behavior when user clicks Initialize and Randomize */
 	virtual void reset() {}

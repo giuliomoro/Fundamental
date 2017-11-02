@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
+#ifdef RACK_JSON
 #include <jansson.h>
+#endif /* RACK_JSON */
 #include "newwidgets.hpp"
 
 
@@ -51,8 +53,10 @@ struct ModuleWidget : OpaqueWidget {
 	void setPanel(std::shared_ptr<SVG> svg);
 #endif /* RACK_GUI */
 
+#ifdef RACK_JSON
 	virtual json_t *toJson();
 	virtual void fromJson(json_t *rootJ);
+#endif /* RACK_JSON */
 
 	/** Disconnects cables from all ports
 	Called when the user clicks Disconnect Cables in the context menu.
@@ -148,8 +152,10 @@ struct RackWidget : OpaqueWidget {
 	void savePatch(std::string filename);
 	void loadPatch(std::string filename);
 #endif /* RACK_GUI */
+#ifdef RACK_JSON
 	json_t *toJson();
 	void fromJson(json_t *rootJ);
+#endif /* RACK_JSON */
 
 	void addModule(ModuleWidget *m);
 	/** Transfers ownership to the caller so they must `delete` it if that is the intension */
@@ -211,8 +217,10 @@ struct ParamWidget : OpaqueWidget, QuantityWidget {
 	*/
 	bool randomizable = true;
 
+#ifdef RACK_JSON
 	json_t *toJson();
 	void fromJson(json_t *rootJ);
+#endif /* RACK_JSON */
 	virtual void randomize();
 #ifdef RACK_GUI
 	void onMouseDown(EventMouseDown &e) override;

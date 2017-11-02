@@ -38,9 +38,11 @@ struct LFO2Widget : ModuleWidget {
 	LFO2Widget();
 };
 
+#ifdef RACK_GUI
 struct DelayWidget : ModuleWidget {
 	DelayWidget();
 };
+#endif /* RACK_GUI */
 
 struct ADSRWidget : ModuleWidget {
 	ADSRWidget();

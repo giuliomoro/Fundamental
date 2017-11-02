@@ -7,8 +7,7 @@ OBJECTS = $(addprefix build/src/,$(notdir $(CPP_SRCS:.cpp=.o)))
 
 CXXFLAGS = -std=c++11 -Isrc -g -O0 -I../../dep/include -DRACK_ARM -DARCH_LIN
 LDFLAGS += -rdynamic \
-	-lpthread -ldl \
-	-L../../dep/lib -ljansson -lsamplerate
+	-lpthread -ldl
 
 dist: all
 	mkdir -p dist/Fundamental

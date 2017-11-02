@@ -61,6 +61,7 @@ void ModuleWidget::setPanel(std::shared_ptr<SVG> svg) {
 #endif /* RACK_GUI */
 
 
+#ifdef RACK_JSON
 json_t *ModuleWidget::toJson() {
 	json_t *rootJ = json_object();
 
@@ -112,6 +113,7 @@ void ModuleWidget::fromJson(json_t *rootJ) {
 		module->fromJson(dataJ);
 	}
 }
+#endif /* RACK_JSON */
 
 void ModuleWidget::disconnect() {
 #ifdef RACK_GUI
