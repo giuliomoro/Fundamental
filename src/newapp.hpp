@@ -270,17 +270,15 @@ struct SVGKnob : virtual Knob, FramebufferWidget {
 };
 
 struct SVGSlider : Knob, FramebufferWidget {
+#ifdef RACK_GUI
 	/** Intermediate positions will be interpolated between these positions */
 	Vec minHandlePos, maxHandlePos;
-#ifdef RACK_GUI
 	/** Not owned */
 	SVGWidget *background;
 	SVGWidget *handle;
 
 	SVGSlider();
-#endif /* RACK_GUI */
 	void step() override;
-#ifdef RACK_GUI
 	void onChange(EventChange &e) override;
 #endif /* RACK_GUI */
 };
