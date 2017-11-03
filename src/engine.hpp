@@ -1,7 +1,9 @@
 #pragma once
 #include <vector>
 #include "util.hpp"
+#ifdef RACK_JSON
 #include <jansson.h>
+#endif /* RACK_JSON */
 
 
 namespace rack {

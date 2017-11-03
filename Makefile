@@ -5,7 +5,7 @@ OBJECTS = $(addprefix build/src/,$(notdir $(CPP_SRCS:.cpp=.o)))
 #include ../../plugin.mk
 #include ../../compile.mk
 
-CXXFLAGS = -std=c++11 -Isrc -g -O0 -I../../dep/include -DRACK_ARM -DARCH_LIN
+CXXFLAGS = -std=c++11 -Isrc -g -O0 -DRACK_ARM -DARCH_LIN
 LDFLAGS += -rdynamic \
 	-lpthread -ldl
 

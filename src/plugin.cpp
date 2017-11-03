@@ -11,7 +11,9 @@
 #ifdef RACK_GUI
 #include <zip.h>
 #endif /* RACK_GUI */
+#ifdef RACK_JSON
 #include <jansson.h>
+#endif /* RACK_JSON */
 
 #if ARCH_WIN
 	#include <windows.h>
