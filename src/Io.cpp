@@ -5,9 +5,6 @@
 struct rackIo* gRackIo = NULL;
 
 struct Io : Module {
-	enum ParamIds {
-		NUM_PARAMS
-	};
 	enum InputIds {
 		CH0_INPUT,
 		CH1_INPUT,
@@ -17,31 +14,41 @@ struct Io : Module {
 		NUM_OUTPUTS
 	};
 
-	Io() : Module(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS) {}
+	Io(unsigned int framesPerBlock, unsigned int channelsFromHost, unsigned int channelsToHost) : Module(0, channelsFromHost, channelsToHost) {
+		gRackIo = new struct rackIo;
+		memset(gRackIo, 0, sizeof(struct rackIo));
+		gRackIo->audioFrames = framesPerBlock;
+		gRackIo->audioOutChannels = channelsFromHost;
+		gRackIo->audioInChannels = channelsToHost;
+		gRackIo->audioIn = new float[gRackIo->audioInChannels * gRackIo->audioFrames];
+		gRackIo->audioOut = new float[gRackIo->audioOutChannels * gRackIo->audioFrames];
+	}
 	void step() override;
 };
 
 void Io::step() {
-	float ch1 = inputs[CH1_INPUT].value;
-	unsigned int channel = 0;
-	unsigned int element = gRackIo->currentOutFrame++ * gRackIo->audioOutChannels + channel;
+	for(unsigned int channel = 0; channel < gRackIo->audioOutChannels; ++channel)
+	{
+		float value = inputs[channel].value;
+		unsigned int element = gRackIo->currentFrame * gRackIo->audioOutChannels + channel;
 #ifndef NDEBUG
-	printf("[%3d]: %4.10f\n", element, ch1);
+		printf("[%3d]: %4.10f     ", element, value);
 #endif
-	gRackIo->audioOut[element] = ch1 * 0.2f;
-	if(gRackIo->currentOutFrame == gRackIo->audioFrames)
-		gRackIo->currentOutFrame = 0;
+		gRackIo->audioOut[element] = value * 0.2f;
+	}
+	++gRackIo->currentFrame;
+	if(gRackIo->currentFrame == gRackIo->audioFrames)
+		gRackIo->currentFrame = 0;
+#ifndef NDEBUG
+	printf("\n");
+#endif
 }
 
-IoWidget::IoWidget() {
-	gRackIo = new struct rackIo;
-	memset(gRackIo, 0, sizeof(struct rackIo));
-	gRackIo->audioFrames = 32;
-	gRackIo->audioOutChannels = Io::NUM_INPUTS; // this is getting confusing
-	gRackIo->audioIn = new float[gRackIo->audioInChannels * gRackIo->audioFrames];
-	gRackIo->audioOut = new float[gRackIo->audioOutChannels * gRackIo->audioFrames];
-	// TODO: freeme
-	Io *module = new Io();
+IoWidget::IoWidget(unsigned int framesPerBlock, unsigned int channelsToHost, unsigned int channelsFromHost) {
+	Io *module = new Io(framesPerBlock, channelsToHost, channelsFromHost);
 	setModule(module);
-	addInput(createInput<PJ301MPort>(Vec(16, 69), module, Io::CH1_INPUT));
+	for(unsigned int n = 0; n < module->inputs.size(); ++n)
+		addInput(createInput<PJ301MPort>(Vec(16, 69), module, n));
+	for(unsigned int n = 0; n < module->outputs.size(); ++n)
+		addOutput(createOutput<PJ301MPort>(Vec(16, 69), module, n));
 }

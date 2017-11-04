@@ -7,7 +7,7 @@ struct rackIo
 	unsigned int audioFrames;
 	unsigned int audioInChannels;
 	unsigned int audioOutChannels;
-	unsigned int currentOutFrame;
+	unsigned int currentFrame;
 };
 
 extern struct rackIo* gRackIo;

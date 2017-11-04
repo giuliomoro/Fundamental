@@ -33,7 +33,7 @@ The Bela software is distributed under the GNU Lesser General Public License
 // Return true on success; returning false halts the program.
 bool setup(BelaContext *context, void *userData)
 {
-	bool ret =  RackSetup();
+	bool ret = RackSetup(context->audioFrames, 2, 0);
 	if(!ret)
 		return false;
 	if(context->audioFrames != gRackIo->audioFrames)
@@ -48,10 +48,9 @@ bool setup(BelaContext *context, void *userData)
 // ADCs and DACs (if available).
 void render(BelaContext *context, void *userData)
 {
-	int numSteps = context->audioFrames;
 	for(unsigned int n = 0; n < context->audioFrames; ++n)
 	{
-		RackRender((context->audioFramesElapsed & 32767) / 32768.f);
+		RackRender((context->audioFramesElapsed & 131071) / 131072.f);
 	}
 	memcpy((void*)context->audioOut, (void*)gRackIo->audioOut, sizeof(context->audioOut[0]) * context->audioFrames * context->audioOutChannels);
 }
