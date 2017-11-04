@@ -26,26 +26,54 @@ The Bela software is distributed under the GNU Lesser General Public License
 #include "Io.hpp"
 #include <string.h>
 
+void Bela_userSettings(BelaInitSettings *settings)
+{
+	settings->uniformSampleRate = 1;
+	settings->interleave = 1;
+	settings->analogOutputsPersist = 0;
+}
+
 bool setup(BelaContext *context, void *userData)
 {
-	bool ret = RackSetup(context->audioFrames, 2, 2);
+	bool ret = RackSetup(context->audioFrames, context->audioOutChannels + context->analogOutChannels, context->audioInChannels + context->analogInChannels);
 	if(!ret)
 		return false;
 	if(context->audioFrames != gRackIo->audioFrames)
-		return false;
-	if(context->audioOutChannels != gRackIo->audioOutChannels)
 		return false;
 	return true;
 }
 
 void render(BelaContext *context, void *userData)
 {
-	memcpy((void*)gRackIo->audioIn, (void*)context->audioIn, sizeof(context->audioIn[0]) * context->audioFrames * context->audioInChannels);
+	if(1)
+	for(unsigned int n = 0; n < context->audioFrames; ++n)
+	{
+		for(unsigned int channel = 0; channel < context->audioInChannels; ++channel)
+		{
+			gRackIo->audioIn[n * gRackIo->audioInChannels + channel] = audioRead(context, n, channel);
+		}
+
+		for(unsigned int channel = 0; channel < context->analogInChannels; ++channel)
+		{
+			gRackIo->audioIn[n * gRackIo->audioInChannels + channel + context->audioInChannels] = analogRead(context, n, channel);
+		}
+	}
 	for(unsigned int n = 0; n < context->audioFrames; ++n)
 	{
 		RackRender();
 	}
-	memcpy((void*)context->audioOut, (void*)gRackIo->audioOut, sizeof(context->audioOut[0]) * context->audioFrames * context->audioOutChannels);
+	for(unsigned int n = 0; n < context->audioFrames; ++n)
+	{
+		for(unsigned int channel = 0; channel < context->audioOutChannels; ++channel)
+		{
+			audioWrite(context, n, channel, gRackIo->audioOut[n * gRackIo->audioOutChannels + channel]);
+		}
+
+		for(unsigned int channel = 0; channel < context->analogOutChannels; ++channel)
+		{
+			analogWriteOnce(context, n, channel, gRackIo->audioOut[n * gRackIo->audioOutChannels + channel + context->audioOutChannels]);
+		}
+	}
 }
 
 void cleanup(BelaContext *context, void *userData)

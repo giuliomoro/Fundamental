@@ -6,13 +6,13 @@
 
 int main()
 {
-	bool ret = RackSetup(16, 2, 0);
+	bool ret = RackSetup(16, 10, 10);
 	if(!ret)
 		return -1;
 
 	for(int n = 0; n < 1000; ++n)
 	{
-		RackRender(1);
+		RackRender();
 		usleep(1000);
 	}
 

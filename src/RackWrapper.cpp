@@ -39,20 +39,28 @@ bool RackSetup(unsigned int framesPerBlock, unsigned int channelsToHost, unsigne
 	wire2 = new Wire;
 	wire3 = new Wire;
 
-	connect(io->outputs[0], gen1->inputs[3], wire2);
-	connect(io->outputs[0], io->inputs[1], wire3);
-	connect(gen1->outputs[0], io->inputs[0], wire1);
-	//connect(io->outputs[1], io->inputs[1], wire2);
-	//connect(gen2->outputs[2], io->inputs[0], wire2);
+	Port* vcf_freq = gen1->inputs[0];
+	Port* vco_square = gen2->outputs[2];
+	Port* analogIn0 = io->outputs[2];
+	Port* audioOut0 = io->inputs[0];
+	Port* vcf_in = gen1->inputs[3];
+	Port* vcf_out = gen1->outputs[0];
+	connect(analogIn0, vcf_freq, wire1);
+	connect(vco_square, vcf_in, wire2);
+	connect(vcf_out, audioOut0, wire3);
+
 	engineAddWire(wire1);
 	engineAddWire(wire2);
 	engineAddWire(wire3);
+
+	gen1->module->params[0].value = 0.5;
+	gen1->module->params[3].value = 1;
+
 	return true;
 }
 
 void RackRender()
 {
-	gen1->module->params[0].value = 0.3;
 	engineStep();
 }
 

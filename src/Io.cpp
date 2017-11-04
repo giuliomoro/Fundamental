@@ -32,13 +32,15 @@ void Io::step() {
 		unsigned int element = gRackIo->currentFrame * gRackIo->audioInChannels + channel;
 		float value = gRackIo->audioIn[element];
 		outputs[channel].value = value * 5.f;
+		//if(channel == 2)
+			//printf("inputs: %.3f\n", value);
 	}
 	for(unsigned int channel = 0; channel < gRackIo->audioOutChannels; ++channel)
 	{
 		float value = inputs[channel].value;
 		unsigned int element = gRackIo->currentFrame * gRackIo->audioOutChannels + channel;
 #ifndef NDEBUG
-		printf("[%3d]: %4.10f     ", element, value);
+		printf("[%3d]: %2.4f     ", element, value);
 #endif
 		gRackIo->audioOut[element] = value * 0.2f;
 	}
