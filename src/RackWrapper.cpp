@@ -1,6 +1,7 @@
 #include "newrack.hpp"
 #include "RackWrapper.h"
 #include "Fundamental.hpp"
+#include "Befaco.hpp"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -31,7 +32,7 @@ bool RackSetup()
 	init(plugin);
 
 	gen1 = new struct VCFWidget;
-	gen2 = new struct VCOWidget;
+	gen2 = new struct EvenVCOWidget;
 	io = new struct IoWidget;
 	wire1 = new Wire;
 	wire2 = new Wire;

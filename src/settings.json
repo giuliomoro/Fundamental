@@ -1,7 +1,7 @@
 {
-  "fileName": "RackWrapper.cpp",
+  "fileName": "render.cpp",
   "CLArgs": {
-    "-p": "128",
+    "-p": "16",
     "-C": "8",
     "-B": "16",
     "-H": "-6",
@@ -12,8 +12,8 @@
     "-A": "0",
     "--pga-gain-left": "10",
     "--pga-gain-right": "10",
-    "user": "--high-performance-mode",
-    "make": "CPPFLAGS=-DRACK_FAST -DARCH_LIN -DRACK_ARM -I/root/Rack/include -I/root/Rack/dep/include;AT=;/;LDLIBS=-L/root/Rack/dep/lib/ -ljansson -lsamplerate -ldl",
+    "user": "",
+    "make": "CPPFLAGS=-DRACK_FAST -DARCH_LIN -DRACK_ARM -I/root/Rack/include -I/root/Rack/dep/include;AT=;LDLIBS=-ldl",
     "-X": "0",
     "audioExpander": "0",
     "-Y": "",

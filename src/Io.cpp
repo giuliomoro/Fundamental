@@ -36,7 +36,7 @@ void Io::step() {
 IoWidget::IoWidget() {
 	gRackIo = new struct rackIo;
 	memset(gRackIo, 0, sizeof(struct rackIo));
-	gRackIo->audioFrames = 128;
+	gRackIo->audioFrames = 32;
 	gRackIo->audioOutChannels = Io::NUM_INPUTS; // this is getting confusing
 	gRackIo->audioIn = new float[gRackIo->audioInChannels * gRackIo->audioFrames];
 	gRackIo->audioOut = new float[gRackIo->audioOutChannels * gRackIo->audioFrames];
