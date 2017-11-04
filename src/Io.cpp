@@ -27,6 +27,12 @@ struct Io : Module {
 };
 
 void Io::step() {
+	for(unsigned int channel = 0; channel < gRackIo->audioInChannels; ++channel)
+	{
+		unsigned int element = gRackIo->currentFrame * gRackIo->audioInChannels + channel;
+		float value = gRackIo->audioIn[element];
+		outputs[channel].value = value * 5.f;
+	}
 	for(unsigned int channel = 0; channel < gRackIo->audioOutChannels; ++channel)
 	{
 		float value = inputs[channel].value;
@@ -36,12 +42,12 @@ void Io::step() {
 #endif
 		gRackIo->audioOut[element] = value * 0.2f;
 	}
-	++gRackIo->currentFrame;
-	if(gRackIo->currentFrame == gRackIo->audioFrames)
-		gRackIo->currentFrame = 0;
 #ifndef NDEBUG
 	printf("\n");
 #endif
+	++gRackIo->currentFrame;
+	if(gRackIo->currentFrame == gRackIo->audioFrames)
+		gRackIo->currentFrame = 0;
 }
 
 IoWidget::IoWidget(unsigned int framesPerBlock, unsigned int channelsToHost, unsigned int channelsFromHost) {

@@ -39,18 +39,20 @@ bool RackSetup(unsigned int framesPerBlock, unsigned int channelsToHost, unsigne
 	wire2 = new Wire;
 	wire3 = new Wire;
 
-	connect(gen1->outputs[1], io->inputs[1], wire3);
+	connect(io->outputs[0], gen1->inputs[3], wire2);
+	connect(io->outputs[0], io->inputs[1], wire3);
 	connect(gen1->outputs[0], io->inputs[0], wire1);
-	connect(gen2->outputs[2], gen1->inputs[3], wire2);
+	//connect(io->outputs[1], io->inputs[1], wire2);
+	//connect(gen2->outputs[2], io->inputs[0], wire2);
 	engineAddWire(wire1);
 	engineAddWire(wire2);
 	engineAddWire(wire3);
 	return true;
 }
 
-void RackRender(float value)
+void RackRender()
 {
-	gen1->module->params[0].value = value;
+	gen1->module->params[0].value = 0.3;
 	engineStep();
 }
 
