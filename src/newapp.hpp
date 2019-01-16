@@ -149,9 +149,9 @@ struct RackWidget : OpaqueWidget {
 	void openDialog();
 	void saveDialog();
 	void saveAsDialog();
+#endif /* RACK_GUI */
 	void savePatch(std::string filename);
 	void loadPatch(std::string filename);
-#endif /* RACK_GUI */
 #ifdef RACK_JSON
 	json_t *toJson();
 	void fromJson(json_t *rootJ);

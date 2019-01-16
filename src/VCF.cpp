@@ -138,6 +138,9 @@ void VCF::step() {
 	res = 5.5 * clampf(res, 0.0, 1.0);
 	filter.resonance = res;
 
+	params[FREQ_PARAM].value = 0.5;
+	params[FREQ_CV_PARAM].value = 0.5;
+	params[RES_PARAM].value = 0.6;
 	// Set cutoff frequency
 	float cutoffExp = params[FREQ_PARAM].value + params[FREQ_CV_PARAM].value * inputs[FREQ_INPUT].value / 5.0;
 	cutoffExp = clampf(cutoffExp, 0.0, 1.0);

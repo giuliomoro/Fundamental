@@ -1,4 +1,5 @@
 #include "Fundamental.hpp"
+#include "Befaco.hpp"
 
 
 Plugin *plugin;
@@ -9,7 +10,6 @@ void init(rack::Plugin *p) {
 #ifdef VERSION
 	p->version = TOSTRING(VERSION);
 #endif
-	//p->addModel(createModel<IoWidget>("Fundamental", "Fundamental", "IO", "IO1"));
 	p->addModel(createModel<VCOWidget>("Fundamental", "Fundamental", "VCO", "VCO-1"));
 	p->addModel(createModel<VCO2Widget>("Fundamental", "Fundamental", "VCO2", "VCO-2"));
 	p->addModel(createModel<VCFWidget>("Fundamental", "Fundamental", "VCF", "VCF"));
@@ -26,4 +26,11 @@ void init(rack::Plugin *p) {
 	p->addModel(createModel<ScopeWidget>("Fundamental", "Fundamental", "Scope", "Scope"));
 	p->addModel(createModel<SEQ3Widget>("Fundamental", "Fundamental", "SEQ3", "SEQ-3"));
 #endif /* RACK_GUI */
+	p->addModel(createModel<EvenVCOWidget>("Befaco", "Befaco", "EvenVCO", "EvenVCO"));
+	p->addModel(createModel<RampageWidget>("Befaco", "Befaco", "Rampage", "Rampage"));
+	p->addModel(createModel<ABCWidget>("Befaco", "Befaco", "ABC", "A*B+C"));
+	p->addModel(createModel<MixerWidget>("Befaco", "Befaco", "Mixer", "Mixer"));
+	p->addModel(createModel<SlewLimiterWidget>("Befaco", "Befaco", "SlewLimiter", "Slew Limiter"));
+	p->addModel(createModel<DualAtenuverterWidget>("Befaco", "Befaco", "DualAtenuverter", "Dual Atenuverter"));
+	p->addModel(createModel<IoWidget>("Fundamental", "Fundamental", "Io", "Io"));
 }

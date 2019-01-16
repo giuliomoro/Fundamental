@@ -39,7 +39,10 @@ bool setup(BelaContext *context, void *userData)
 	if(!ret)
 		return false;
 	if(context->audioFrames != gRackIo->audioFrames)
+	{
+		fprintf(stderr, "audioFrames do not match gRackIo->audioFrames\n");
 		return false;
+	}
 	return true;
 }
 

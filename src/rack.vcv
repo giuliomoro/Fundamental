@@ -1,0 +1,84 @@
+{
+  "version": "",
+  "modules": [
+    {
+      "manufacturer": "Fundamental",
+      "model": "Io",
+      "pos": [
+        840.0,
+        0.0
+      ],
+      "params": []
+    },
+    {
+      "manufacturer": "Fundamental",
+      "model": "VCO",
+      "pos": [
+        225.0,
+        0.0
+      ],
+      "params": [
+        1.0,
+        1.0,
+        -30.941999435424805,
+        0.0,
+        0.5,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "manufacturer": "Fundamental",
+      "model": "VCF",
+      "pos": [
+        435.0,
+        0.0
+      ],
+      "params": [
+        0.5,
+        0.5,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "wires": [
+    {
+      "outputModuleId": 1,
+      "outputId": 1,
+      "inputModuleId": 2,
+      "inputId": 3
+    },
+    {
+      "outputModuleId": 2,
+      "outputId": 0,
+      "inputModuleId": 0,
+      "inputId": 0
+    },
+    {
+      "outputModuleId": 2,
+      "outputId": 1,
+      "inputModuleId": 0,
+      "inputId": 1
+    },
+    {
+      "outputModuleId": 0,
+      "outputId": 3,
+      "inputModuleId": 2,
+      "inputId": 0
+    },
+    {
+      "outputModuleId": 0,
+      "outputId": 4,
+      "inputModuleId": 2,
+      "inputId": 1
+    },
+    {
+      "outputModuleId": 0,
+      "outputId": 2,
+      "inputModuleId": 1,
+      "inputId": 0
+    }
+  ]
+}

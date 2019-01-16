@@ -1,7 +1,7 @@
 {
   "fileName": "render.cpp",
   "CLArgs": {
-    "-p": "16",
+    "-p": "64",
     "-C": "8",
     "-B": "16",
     "-H": "-6",
@@ -13,7 +13,7 @@
     "--pga-gain-left": "10",
     "--pga-gain-right": "10",
     "user": "",
-    "make": "CPPFLAGS=-DRACK_FAST -DARCH_LIN -DRACK_ARM -I/root/Rack/include -I/root/Rack/dep/include;AT=;LDLIBS=-ldl",
+    "make": "CPPFLAGS=-DRACK_JSON -DRACK_FAST -DARCH_LIN -DRACK_ARM -I/root/Rack/include -I/root/Rack/dep/include;AT=;LDLIBS=-ldl -ljansson -L/root/Rack/dep/lib",
     "-X": "0",
     "audioExpander": "0",
     "-Y": "",

@@ -11,7 +11,8 @@ extern Plugin *plugin;
 ////////////////////
 
 struct IoWidget : ModuleWidget {
-	IoWidget(unsigned int framesPerBlock, unsigned int inChannels, unsigned int outChannels);
+	//IoWidget(unsigned int framesPerBlock, unsigned int inChannels, unsigned int outChannels);
+	IoWidget();
 };
 
 struct VCOWidget : ModuleWidget {
